@@ -1,0 +1,30 @@
+[{
+  
+  "step": 1,
+  "milestone": "Beginner",
+  "streak_count": 5
+},
+{
+ 
+  "step": 2,
+  "milestone": "Pro",
+  "streak_count": 20
+},
+{
+ 
+  "step": 3,
+  "milestone": "Master",
+  "streak_count": 50
+},
+{
+  
+  "step": 4,
+  "milestone": "Grandmaster",
+  "streak_count": 100
+},
+{
+  
+  "step": 5,
+  "milestone": "Legend",
+  "streak_count": 200
+}]

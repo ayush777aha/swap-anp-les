@@ -1,0 +1,18 @@
+get subjects - chapters 
+curl --location 'http://localhost:3000/api/choiceData'
+
+get questions list 
+curl --location 'http://localhost:3000/api/questions?subject=Chemistry&chapter=Chemical%20Reactions&page=1&limit=10'
+
+get random rewards and update user's rewards
+curl --location 'http://localhost:3000/api/rewards/67'
+
+get user's earnings
+curl --location 'http://localhost:3000/api/earnings/67'
+
+update streak at end of game
+curl --location --request PUT 'http://localhost:3000/api/updateMaxStreak/67' \
+--header 'Content-Type: application/json' \
+--data '{
+    "max_streak":109
+}'
