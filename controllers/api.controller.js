@@ -83,7 +83,7 @@ exports.getRandomRewardAndSave = async (req, res) => {
       });
     }
 
-    addRewards(userId, randomReward[0]);
+    await addRewards(userId, randomReward[0]);
 
     res.json({
       status: true,
@@ -108,7 +108,7 @@ async function addRewards(userId, reward) {
     }
 
 
-    existingEarning.scratch_cards_details.push({ details: reward })
+    existingEarning.rewards.push({ ...reward })
 
     // const { _id,type, count, name, code, description } = reward;
 
@@ -145,7 +145,7 @@ exports.getUserEarning = async (req, res) => {
   try {
     let earningWithLookup = await Earning.findOne({ userId })
       .populate({
-        path: 'pw_coupons_details scratch_cards_details.details',
+        path: 'pw_coupons_details rewards',
         model: 'rewards', // Reference to the 'Reward' model
       })// Populate related collections
 
@@ -216,8 +216,8 @@ async function saveScratchCard(existingEarning, reward, userId, scratchId) {
   }
 
   await Earning.findOneAndUpdate(
-    { userId, 'scratch_cards_details.details': scratchId },
-    { $set: { 'scratch_cards_details.$.isScratch': true } },
+    { userId, 'rewards._id': scratchId },
+    { $set: { 'rewards.$.isScratch': true } },
     { new: true }
   )
   await existingEarning.save();
@@ -311,3 +311,18 @@ function shuffleArray(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+
+
+
+// https://drive.google.com/file/d/1UHt-9whEeweLCJot98D0VnxxH3By8zrr/view?usp=drive_link					
+// https://drive.google.com/file/d/1hvOIiP2wAouRSDAczNgU9CA6KHrc2iXL/view?usp=drive_link					
+// https://drive.google.com/file/d/17OMCqy2ZgprH0POWB8GX4_vSfUg6cNDn/view?usp=drive_link					
+// https://drive.google.com/file/d/1wD7DSX1pKX5eJuuwoGlXKuMYO4DlpjYx/view?usp=drive_link					
+// https://drive.google.com/file/d/1Evnqlvw8_6dpR4gZX8-SxD9u9Dh6gtf2/view?usp=drive_link					
+// https://drive.google.com/file/d/1ejXbxNwA7VYtJyPPqHloVrLaJHWfatpZ/view?usp=drive_link					
+// https://drive.google.com/file/d/1ipc7MAU8-DM93L-2ltDjnYUdtp-wBUAO/view?usp=drive_link					
+// https://drive.google.com/file/d/1Gdt3bn0Llt5EWRvgSUjX3WLJ8UGHMH_s/view?usp=drive_link					
+// https://drive.google.com/file/d/1DbqlSPF_pAfTzNItYo3UfrDDdFkjtsAM/view?usp=drive_link					
+// https://drive.google.com/file/d/115ok_zJtkZAew9WRNxAFTmDbsBsDHieU/view?usp=drive_link					
+// https://drive.google.com/file/d/1mcb0G2XvbAElWBF_akXHw4cuR2zBjoaG/view?usp=drive_link					

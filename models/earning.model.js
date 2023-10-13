@@ -1,16 +1,26 @@
 const mongoose = require('mongoose');
 
 const scratchCardSchema = new mongoose.Schema(
+  
   {
     isScratch: {
       type: Boolean,
       default: false,
     },
-    details: {
+    _id: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'rewards'
+      ref: 'rewards',
     },
+    type: String,
+    message: String,
+    code: String,
+    percentage: Number,
+    name: String,
+    description: String,
+    count: Number,
+    image_url: String,
+    createdAt: Date,
+    updatedAt: Date,
   },
   {
     versionKey: false,
@@ -18,6 +28,7 @@ const scratchCardSchema = new mongoose.Schema(
     timestamps: true, // Add timestamps
   }
 );
+
 
 const earningSchema = new mongoose.Schema({
   userId: { type: Number, default: 0 },
@@ -31,9 +42,9 @@ const earningSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'rewards', // Reference to the 'Reward' model
-    },
+    }
   ],
-  scratch_cards_details: [scratchCardSchema],
+  rewards: [scratchCardSchema],
 }, { versionKey: false });
 
 const Earning = mongoose.model('earnings', earningSchema);
